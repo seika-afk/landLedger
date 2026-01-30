@@ -41,6 +41,17 @@ realEstate.address,
 
 
 
+//approve property
+	transaction = await realEstate.connect(seller).approve(escrow.address,1)
+
+		await transaction.wait()
+
+		//list property
+		//
+		transaction=await escrow.connect(seller).list(1)
+		await transaction.wait()
+
+
 	})
 
 	describe('Deployment',()=>{
@@ -82,6 +93,17 @@ realEstate.address,
 
 	}) 
 
+
+	describe('listing',async ()=>{
+
+		it('Updates ownership',async ()=>{
+			expect(await realEstate.ownerOf(1)).to.be.equal(escrow.address) 
+
+
+		})
+		
+
+	})
 
 	//it('saves the addreses',async()=>{});
 
