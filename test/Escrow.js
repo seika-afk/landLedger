@@ -48,7 +48,7 @@ realEstate.address,
 
 		//list property
 		//
-		transaction=await escrow.connect(seller).list(1)
+		transaction=await escrow.connect(seller).list(1,buyer.address,tokens(10),tokens(5))
 		await transaction.wait()
 
 
@@ -95,12 +95,41 @@ realEstate.address,
 
 
 	describe('listing',async ()=>{
+		
+		it('Updates as Listed',async ()=>{
+			const result=await escrow.isListed(1)
+			
+			expect(result).to.be.equal(true) 
+
+
+		})
+
+		
+
+		
 
 		it('Updates ownership',async ()=>{
 			expect(await realEstate.ownerOf(1)).to.be.equal(escrow.address) 
 
 
 		})
+
+		it('Returns buyer',async ()=>{
+			const result=await escrow.buyer(1)
+			expect(result).to.be.equal(buyer.address)
+
+	})
+	it('Returns purchasePrice',async ()=>{
+			const result=await escrow.purchasePrice(1)
+			expect(result).to.be.equal(tokens(10))
+
+	})
+	it('Returns escrow amount',async ()=>{
+			const result=await escrow.escrowAmount(1)
+			expect(result).to.be.equal(tokens(5))
+
+	})
+
 		
 
 	})

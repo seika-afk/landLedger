@@ -15,6 +15,11 @@ contract Escrow {
 	address payable public seller;
 	address public nftAddress;   
 
+	mapping(uint256=>bool) public isListed;
+	mapping(uint256=>uint256) public purchasePrice;
+	mapping(uint256=>uint256) public escrowAmount;
+	mapping(uint256=> address) public buyer;
+
 	constructor(address _nftAddress, address payable _seller, address _inspector, address _lender){
 		lender = _lender;
 		inspector = _inspector;
@@ -22,9 +27,15 @@ contract Escrow {
 		nftAddress = _nftAddress;   	}
 
 
-		function list(uint256 _nftID) public{
-			IERC721(nftAddress).transferFrom(msg.sender,address(this),_nftID);
-		 
+		function list(uint256 _nftID,address _buyer,uint256 _purchasePrice,uint256 _escrowAmount) public{
+					IERC721(nftAddress).transferFrom(msg.sender,address(this),_nftID);
+			isListed[_nftID]=true;
+			purchasePrice[_nftID]=_purchasePrice;
+			escrowAmount[_nftID]=_escrowAmount;
+			buyer[_nftID]=_buyer;
+
+			//here we transfer the ownership from owner to escro address:
+		 //and call from the js to approve of it
 
 		}
  }
