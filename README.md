@@ -27,7 +27,9 @@
 In a separate terminal execute:
 `$ npx hardhat run ./scripts/deploy.js --network localhost`
 
-Note : This Project is made by the reference of projects from Dapp university.
-
-### 7. Start frontend
+### 6. Start frontend
 `$ npm run start`
+
+
+
+Note : This Project is made by the reference of projects from Dapp university.
