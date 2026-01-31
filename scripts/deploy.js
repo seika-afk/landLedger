@@ -15,16 +15,13 @@ async function main() {
 
   console.log(`Deployed Real Estate Contract at: ${realEstate.address}`);
   console.log("Minting 3 properties...\n");
-
-  // mint NFTs
-  for (let i = 0; i < 3; i++) {
-    const tx = await realEstate
-      .connect(seller)
-      .mint(
-        `https://ipfs.io/ipfs/QmQVcpsjrA6crliJjZAodYwmPekYgbnXGo4DFubJiLc2EB/${i + 1}.json`
-      );
-    await tx.wait();
-  }
+// mint NFTs
+for (let i = 0; i < 3; i++) {
+  const tx = await realEstate
+    .connect(seller)
+    .mint(`https://ipfs.io/ipfs/QmQVcpsjrA6cr1iJjZAodYwmPekYgbnXGo4DFubJiLc2EB/${i+1}.json`);
+  await tx.wait();
+}
 
   // deploy Escrow
   const Escrow = await ethers.getContractFactory("Escrow");
